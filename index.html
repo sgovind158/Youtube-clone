@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube clone</title>
+    <script src="https://kit.fontawesome.com/c1fd52a953.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="youtube.css">
+   
+</head>
+<body>
+    <nav class="navbar1">
+        <div class="toggle-btn1">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <img src="youtubelogo.png" class="logo" alt="">
+        <div class="search-box">
+            <input type="text" class="search-bar"   id="query"
+            
+             placeholder="search video">
+            <button onclick="serchVideo()" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div class="user-option">
+            <i class="fa-solid fa-video"></i>
+            <i class="fa-solid fa-grid-2"></i>
+            <i class="fa-solid fa-bell"></i>
+           <!-- <div class="user-dp">
+               <img src="user-dp.jpg" alt="">
+           </div> -->
+
+        </div>
+    </nav>
+    <!-- side bar  -->
+
+    <div class="side-bar">
+<a href="#" class="links active">home</a>
+<a href="#" class="links">explore</a>
+<a href="#" class="links"><img src="" alt="">subscripton</a>
+<hr class="seprator">
+<a href="#" class="links">Library</a>
+<a href="#" class="links">history</a>
+<a href="#" class="links"></i>your video</a>
+<a href="#" class="links"> watch leater</a>
+<a href="#" class="links">like video</a>
+<a href="#" class="links">show more</a>
+
+    </div>
+
+
+    <!-- filters  -->
+    <div class="filters">
+        <button class="filter-option active">all</button>
+        <button class="filter-option">CSS</button>
+        <button class="filter-option">web development</button>
+        <button class="filter-option">python</button>
+        <button class="filter-option">entertainment</button>
+        <button class="filter-option">marval</button>
+        <button class="filter-option">javascript</button>
+        <button class="filter-option">artificial intelligence</button>
+        <button class="filter-option">machine learning </button>
+        <button class="filter-option"> tranding</button>
+
+
+    </div>
+    <!-- videos div -->
+    <div class="video-container" id="showVideo">
+
+
+    </div>
+</body>
+</html>
+
+<script>
+
+
+const API = "AIzaSyBitNx3HIxhYDg1mKYxudaG5pnbmO2KA4s"
+
+const serchVideo = async ()=>{
+
+    try{
+        const q = document.querySelector("#query").value ;
+        const res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${q}&key=${API}`)
+
+       const data = await res.json()
+       console.log(data.items)
+       append(data.items)
+
+
+
+
+    }catch(err){
+
+        console.log("err",err)
+    }
+
+}
+
+// //normal function
+
+// function append(videoData){
+
+// }
+
+//arrow function
+const append = (videoData)=>{
+    let showVideo = document.querySelector("#showVideo")
+    showVideo.innerHTML = null;
+
+   videoData.forEach(({id:{videoId},snippet:{title}})=>{
+       let div = document.createElement("div")
+
+       let iframe = document.createElement("iframe")
+       iframe.src = `https://www.youtube.com/embed/${videoId}`;
+       iframe.width = "100%"
+       iframe.height = "100%"
+       iframe.allow = "fullscreen";
+       let name = document.createElement("h5")
+       name.innerText = title;
+    //    name.style.marginTop="100px"
+       div.append(iframe,name)
+     
+
+       let data = {
+           title,
+           videoId,
+       };
+
+    //   div.onclick = () => {
+
+    //     showVideoNextPage(data)
+
+    //   };
+
+    div.addEventListener("click",function(){
+        showVideoNextPage(data)
+    })
+      showVideo.append(div)  
+
+   })
+
+  
+
+}
+
+const showVideoNextPage = (x)=>{
+    console.log("inside video fn")
+       window.location.href = "video.html"
+       localStorage.setItem("video",JSON.stringify(x))
+   }
+
+
+
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show video</title>
+    <script src="https://kit.fontawesome.com/c1fd52a953.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="video.css">
+<style>
+#showVideo{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-row: auto;
+    border: 1px solid black;
+    margin: auto;
+}
+
+#iframe{
+    width: 100%;
+    height: 600px;
+}
+</style>
+</head>
+<body>
+  
+    
+    <div id="showVideo">
+
+    </div>
+    
+</body>
+</html>
+
+<script>
+    let videoShow = JSON.parse(localStorage.getItem("video"))
+    console.log(videoShow.videoId,"inside fn")
+
+    let showVideo = document.querySelector("#showVideo")
+    showVideo.innerHTML =null;
+
+    let iframe = document.createElement("iframe")
+    iframe.src=`https://www.youtube.com/embed/${videoShow.videoId}`
+    iframe.setAttribute("id","iframe")
+
+    showVideo.append(iframe)
+
+
+</script>
