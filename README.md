@@ -1,5 +1,6 @@
 # Youtube-clone 
-#Link :- https://1youtube.netlify.app/
+#Live Link :- https://1youtube.netlify.app/
+#Youtube Video Link:- https://youtu.be/xtlFLH7VGdc?list=PLZQiN5xJpq1UFrFDv6Q5hY2ttVbwmPf2e
 # Description :-
 YouTube is a US-based video viewing platform where registered members can upload their own videos as well as watch video clips.I use youtube google Api to create this project
 
